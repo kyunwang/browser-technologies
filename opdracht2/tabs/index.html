@@ -148,13 +148,22 @@
 
 	for(var index = 0; index < tabs.length; index++) {
 		(function(i) {
-			tabs[i].addEventListener('click', function() {
-				hideContent();
-				tabsCon[i].style.display = 'block';
-			});
+			if (document.addEventListener) {
+				tabs[i].addEventListener('click', function() {
+					toggleTab(i);
+				});
+			} else {
+				tabs[i].attachEvent('onclick', function() {
+					toggleTab(i);
+				});
+			}
 		})(index) // To keep the context and index number
 	}
 	
+	function toggleTab(i) {
+		hideContent();
+		tabsCon[i].style.display = 'block';
+	}
 
 	function hideContent(startIndex) {
 		for (var hideIndex = 0; hideIndex < tabsCon.length; hideIndex++) {

@@ -10,12 +10,22 @@
 		form {
 			width: 80%;
 			padding: 3em;
-			margin: auto;
-			margin: 3em;
+			margin: 3em auto;
 			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 			border-radius: 3px;
 		}
 
+		fieldset {
+			/* position: fixed; */
+			/* top: 40px; */
+			/* z-index: 100; */
+			/* bottom: 0; */
+			margin-bottom: 3em;;
+		}
+
+		fieldset img {
+			max-width: 8em;
+		}
 
 		img {
 			box-sizing: border-box;
@@ -28,6 +38,7 @@
 		}
 
 		main {
+			position: relative;
 			column-count: 2;
 		}
 
@@ -67,10 +78,10 @@
 
 <body>
 	<form action="/" method="POST">
-		<section>
-			selected stuff
-			<input type="submit">Choose</input>
-		</section>
+		<fieldset>
+			<img src="" alt="">
+			<input type="submit" value="Choose as profile picture"  name="submit-button">
+		</fieldset>
 
 		<main>
 			<input id="item1" type="radio" name="profile-pic">
@@ -106,6 +117,33 @@
 </body>
 
 <script>
+	var allRadioBtns = document.getElementsByTagName('input');
+	var submitBtn = document.getElementsByName('submit-button');
+	var imagePreview = document.getElementsByTagName('img')[0];
 
+	submitBtn[0].disabled = true;
+
+	for (var index = 1; index < allRadioBtns.length; index++) {
+		var element = allRadioBtns[index];
+
+		if (document.addEventListener) {
+			element.addEventListener('click', selectImage)
+		} else {
+			element.attachEvent('onclick', selectImage);
+		}
+	}
+
+	function selectImage(event) {
+		submitBtn[0].disabled = false;
+		
+		var selectedImage = event.target.nextElementSibling.children[0];
+		// console.log(event.target.nextElementSibling.children);
+		console.log(selectedImage.src);
+
+		imagePreview.src = selectedImage.src;
+	}
+
+
+	
 </script>
 </html>

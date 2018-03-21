@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Image picker</title>
+
+	<style>
+		form {
+			width: 80%;
+			padding: 3em;
+			margin: auto;
+			margin: 3em;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+			border-radius: 3px;
+		}
+
+
+		img {
+			box-sizing: border-box;
+			display: inline-block;
+			position: relative;
+			max-width: 100%;
+			/* max-width: 25em; */
+			max-height: 100%;
+			object-fit: cover;
+		}
+
+		main {
+			column-count: 2;
+		}
+
+		[type="radio"] {
+			position: absolute;
+			right: 9999999px;
+		}
+
+		[type="radio"] + label img {
+			filter: grayscale(95%);
+			transition: filter .3s ease-in;
+		}
+		
+		[type="radio"] + label img:hover {
+			filter: grayscale(0);
+		}
+
+		[type="radio"]:checked + label img {
+			border: 5px solid red;
+			filter: grayscale(0);
+		}
+		
+
+		@media all and (min-width: 40em) {
+			main {
+				column-count: 3;
+			}
+		}
+
+		@media all and (min-width: 60em) {
+			main {
+				column-count: 4;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<form action="/" method="POST">
+		<section>
+			selected stuff
+			<input type="submit">Choose</input>
+		</section>
+
+		<main>
+			<input id="item1" type="radio" name="profile-pic">
+			<label for="item1"><img src="./unsplash/1.jpeg" alt=""></label>
+			<input id="item2" type="radio" name="profile-pic">
+			<label for="item2"><img src="./unsplash/2.jpeg" alt=""></label>
+			<input id="item3" type="radio" name="profile-pic">
+			<label for="item3"><img src="./unsplash/3.jpeg" alt=""></label>
+			<input id="item4" type="radio" name="profile-pic">
+			<label for="item4"><img src="./unsplash/4.jpeg" alt=""></label>
+			<input id="item5" type="radio" name="profile-pic">
+			<label for="item5"><img src="./unsplash/5.jpeg" alt=""></label>
+			<input id="item6" type="radio" name="profile-pic">
+			<label for="item6"><img src="./unsplash/6.jpeg" alt=""></label>
+			<input id="item7" type="radio" name="profile-pic">
+			<label for="item7"><img src="./unsplash/7.jpeg" alt=""></label>
+			<input id="item8" type="radio" name="profile-pic">
+			<label for="item8"><img src="./unsplash/8.jpeg" alt=""></label>
+			<input id="item9" type="radio" name="profile-pic">
+			<label for="item9"><img src="./unsplash/9.jpeg" alt=""></label>
+			<input id="item10" type="radio" name="profile-pic">
+			<label for="item10"><img src="./unsplash/10.jpeg" alt=""></label>
+			<input id="item11" type="radio" name="profile-pic">
+			<label for="item11"><img src="./unsplash/11.jpeg" alt=""></label>
+			<input id="item12" type="radio" name="profile-pic">
+			<label for="item12"><img src="./unsplash/12.jpeg" alt=""></label>
+			<input id="item13" type="radio" name="profile-pic">
+			<label for="item13"><img src="./unsplash/13.jpeg" alt=""></label>
+			<input id="item14" type="radio" name="profile-pic">
+			<label for="item14"><img src="./unsplash/14.jpeg" alt=""></label>
+		</main>
+	</form>
+</body>
+
+<script>
+
+</script>
+</html>

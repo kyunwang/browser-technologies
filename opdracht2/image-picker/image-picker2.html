@@ -7,7 +7,30 @@
 	<title>Imagepicker 2</title>
 
 	<style>
-	
+		form {
+			max-width: 30em;
+			margin: 3em auto;
+		}
+
+		form img {
+			max-width: 30em;
+		}
+
+		fieldset {
+			min-height: 10em;
+			text-align: center;
+			/* border: none; */
+			margin: 0;
+		}
+
+		[type="submit"] {
+			width: 100%;
+			border: 1px solid #0f0f0f;
+			padding: .8em;
+			/* border-top: none; */
+		}
+
+
 	</style>
 </head>
 <body>
@@ -17,17 +40,20 @@
 			<input id="file-input" type="file" accept="image/*" name="image-file">
 			<img src="#" alt="">
 		</fieldset>
-		<input type="submit" value="Use as profile picture" disabled>
+		<input type="submit" value="Use as profile picture" name="submit-button">
 	</form>
 </body>
 
 <script>
 	var imageInput = document.getElementsByName('image-file');
+	var submitImage = document.getElementsByName('submit-button');
 	var filePreview = document.getElementsByTagName('img');
 
 	var gotFileReader = 'FileReader' in window;
 
 	if (gotFileReader) {
+		submitImage[0].disabled = true;
+
 		imageInput[0].onchange = function () {
 			var reader = new FileReader(); // Asynchronously read the contents of files
 	
@@ -35,6 +61,7 @@
 				reader.onload = function(event) {
 					var result = event.target.result;
 					filePreview[0].src = result;
+					submitImage[0].disabled = false;
 				}
 	
 				reader.readAsDataURL(this.files[0]);

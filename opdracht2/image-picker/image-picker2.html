@@ -5,11 +5,42 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Imagepicker 2</title>
+
+	<style>
+	
+	</style>
 </head>
 <body>
 	<form action="/" method="POST">
-		<label for="file-input"></label>
-		<input id="file-input" type="file">
+		<fieldset>
+			<label for="file-input"></label>
+			<input id="file-input" type="file" accept="image/*" name="image-file">
+			<img src="#" alt="">
+		</fieldset>
+		<input type="submit" value="Use as profile picture" disabled>
 	</form>
 </body>
+
+<script>
+	var imageInput = document.getElementsByName('image-file');
+	var filePreview = document.getElementsByTagName('img');
+
+	var gotFileReader = 'FileReader' in window;
+
+	if (gotFileReader) {
+		imageInput[0].onchange = function () {
+			var reader = new FileReader(); // Asynchronously read the contents of files
+	
+			if (this.files && this.files[0]) {
+				reader.onload = function(event) {
+					var result = event.target.result;
+					filePreview[0].src = result;
+				}
+	
+				reader.readAsDataURL(this.files[0]);
+			}
+		}
+	}
+
+</script>
 </html>

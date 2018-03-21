@@ -117,33 +117,36 @@
 </body>
 
 <script>
-	var allRadioBtns = document.getElementsByTagName('input');
-	var submitBtn = document.getElementsByName('submit-button');
-	var imagePreview = document.getElementsByTagName('img')[0];
+	var imageSelect = {
+		allRadioBtns: document.getElementsByTagName('input'),
+		imagePreview: document.getElementsByTagName('img')[0],
+		submitBtn: document.getElementsByName('submit-button'),
+		init() {
+			this.submitBtn[0].disabled = true;
 
-	submitBtn[0].disabled = true;
+			for (var index = 1; index < this.allRadioBtns.length; index++) {
+				var element = this.allRadioBtns[index];
+				var self = this;
 
-	for (var index = 1; index < allRadioBtns.length; index++) {
-		var element = allRadioBtns[index];
+				if (document.addEventListener) {
+					element.addEventListener('click', function() {
+						self.selectImage(event, self);
+					})
+				} else {
+					element.attachEvent('onclick', function() {
+						self.selectImage(event, self);
+					});
+				}
+			}
+		},
+		selectImage(event, self) {
+			self.submitBtn[0].disabled = false;
+			var selectedImage = event.target.nextElementSibling.children[0];
 
-		if (document.addEventListener) {
-			element.addEventListener('click', selectImage)
-		} else {
-			element.attachEvent('onclick', selectImage);
+			self.imagePreview.src = selectedImage.src;
 		}
 	}
 
-	function selectImage(event) {
-		submitBtn[0].disabled = false;
-		
-		var selectedImage = event.target.nextElementSibling.children[0];
-		// console.log(event.target.nextElementSibling.children);
-		console.log(selectedImage.src);
-
-		imagePreview.src = selectedImage.src;
-	}
-
-
-	
+	imageSelect.init();
 </script>
 </html>

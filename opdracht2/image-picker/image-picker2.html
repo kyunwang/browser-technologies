@@ -45,29 +45,34 @@
 </body>
 
 <script>
-	var imageInput = document.getElementsByName('image-file');
-	var submitImage = document.getElementsByName('submit-button');
-	var filePreview = document.getElementsByTagName('img');
+	var imageSelect = {
+		imageInput: document.getElementsByName('image-file'),
+		submitImage: document.getElementsByName('submit-button'),
+		filePreview: document.getElementsByTagName('img'),
+		gotFileReader: 'FileReader' in window,
+		init() {
+			if (this.gotFileReader) {
+				var self = this;
+				this.submitImage[0].disabled = true;
 
-	var gotFileReader = 'FileReader' in window;
-
-	if (gotFileReader) {
-		submitImage[0].disabled = true;
-
-		imageInput[0].onchange = function () {
-			var reader = new FileReader(); // Asynchronously read the contents of files
-	
-			if (this.files && this.files[0]) {
-				reader.onload = function(event) {
-					var result = event.target.result;
-					filePreview[0].src = result;
-					submitImage[0].disabled = false;
+				this.imageInput[0].onchange = function () {
+					var reader = new FileReader(); // Asynchronously read the contents of files
+			
+					if (this.files && this.files[0]) {
+						reader.onload = function(event) {
+							var result = event.target.result;
+							self.filePreview[0].src = result;
+							self.submitImage[0].disabled = false;
+						}
+			
+						reader.readAsDataURL(this.files[0]);
+					}
 				}
-	
-				reader.readAsDataURL(this.files[0]);
 			}
 		}
 	}
+
+	imageSelect.init();
 
 </script>
 </html>

@@ -9,7 +9,7 @@
 	<style>
 		form {
 			width: 80%;
-			padding: 3em;
+			padding: 1em;
 			margin: 3em auto;
 			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 			border-radius: 3px;
@@ -27,6 +27,11 @@
 			max-width: 8em;
 		}
 
+		label {
+			display: inline-block;
+			max-width: 8em;
+		}
+
 		img {
 			box-sizing: border-box;
 			display: inline-block;
@@ -35,6 +40,7 @@
 			/* max-width: 25em; */
 			max-height: 100%;
 			object-fit: cover;
+			pointer-events: none;
 		}
 
 		main {
@@ -65,6 +71,10 @@
 		@media all and (min-width: 40em) {
 			main {
 				column-count: 3;
+			}
+
+			form {
+				padding:  3em;
 			}
 		}
 
@@ -117,21 +127,38 @@
 </body>
 
 <script>
+
+	// Source: https://github.com/Alhadis/Snippets/blob/master/js/polyfills/IE8-child-elements.js
+	if(!("nextElementSibling" in document.documentElement)){
+		Object.defineProperty(Element.prototype, "nextElementSibling", {
+			get: function(){
+				var e = this.nextSibling;
+				while(e && 1 !== e.nodeType)
+					e = e.nextSibling;
+				return e;
+			}
+		});
+	} else {
+		console.log('else');
+	}
+
+
 	var imageSelect = {
 		allRadioBtns: document.getElementsByTagName('input'),
 		imagePreview: document.getElementsByTagName('img')[0],
 		submitBtn: document.getElementsByName('submit-button'),
-		init() {
+		init: function() {
 			this.submitBtn[0].disabled = true;
 
 			for (var index = 1; index < this.allRadioBtns.length; index++) {
-				var element = this.allRadioBtns[index];
 				var self = this;
+				var element = this.allRadioBtns[index];
 
-				if (document.addEventListener) {
+				if (element.addEventListener) {
+					// console.log('got');
 					element.addEventListener('click', function() {
 						self.selectImage(event, self);
-					})
+					}, false)
 				} else {
 					element.attachEvent('onclick', function() {
 						self.selectImage(event, self);
@@ -139,8 +166,9 @@
 				}
 			}
 		},
-		selectImage(event, self) {
+		selectImage: function(event, self) {
 			self.submitBtn[0].disabled = false;
+			
 			var selectedImage = event.target.nextElementSibling.children[0];
 
 			self.imagePreview.src = selectedImage.src;

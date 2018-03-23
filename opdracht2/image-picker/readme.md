@@ -19,9 +19,21 @@ This component is a simulation of a situation where you already have a selection
 It should be a form with one selectable items max, so I made it with checkboxes.
 
 ## Testing
+Tested IE using virtualbox windows 7 and in the devicelab.
 
 **Working**
+- IE11
+![][ie11]
 
+<!-- ![][kindle]
+
+![][nokia] -->
+
+![][op]
+
+<!-- ![][lg]
+
+![][samsung] -->
 
 **Not Working**
 - IE8

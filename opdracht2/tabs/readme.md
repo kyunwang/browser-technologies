@@ -38,7 +38,7 @@ Tested IE using virtualbox windows 7 and in the devicelab.
 - IE8
 ![][ie8-no]
 
-A script didn't work here so I had to fix it.
+A script didn't work here so I had to fix it. (used a snippet online, didn't use it thou)
 
 ![][ie8]
 

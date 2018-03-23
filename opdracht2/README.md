@@ -1,7 +1,12 @@
-Browser Technologies
+# Browser Technologies
 // Robuuste, toegankelijke websites leren bouwen …
 
-Opdracht 2 - 1, 2, 3 Feature Detectie
+**[Tabs](https://kyunwang.github.io/browser-technologies/opdracht2/tabs/)**
+
+**[Image picker](https://kyunwang.github.io/browser-technologies/opdracht2/image-picker/)**
+
+**[Image picker 2](https://kyunwang.github.io/browser-technologies/opdracht2/image-picker/image-picker2)**
+# Opdracht 2 - 1, 2, 3 Feature Detectie
 // Wat laat je zien als een browser of gebruiker 'enhancement' niet kan tonen of zien? Hoe doe je Feature Detection en wat doe je als een techniek niet werkt?
 
 Werk 2 componenten uit in een demo. Je onderzoekt hoe je verschillende features door verschillende browsers worden ondersteund en hoe je voor goede fallback kan zorgen. Gebruik html5test.com, css3test.com en kangax.github.io/compat-table/es6/

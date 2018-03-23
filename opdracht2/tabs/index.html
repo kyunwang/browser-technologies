@@ -143,39 +143,41 @@
 </body>
 
 <script>
-	var tabs = document.getElementsByClassName('tab-select');
-	var tabsCon = document.getElementsByClassName('tab-con');
-
-	for(var index = 0; index < tabs.length; index++) {
-		(function(i) {
-			if (document.addEventListener) {
-				tabs[i].addEventListener('click', function() {
-					toggleTab(i);
-				});
-			} else {
-				tabs[i].attachEvent('onclick', function() {
-					toggleTab(i);
-				});
-			}
-		})(index) // To keep the context and index number
-	}
+	if (document.getElementsByClassName) {
+		var tabs = document.getElementsByClassName('tab-select');
+		var tabsCon = document.getElementsByClassName('tab-con');
 	
-	function toggleTab(i) {
-		hideContent();
-		tabsCon[i].style.display = 'block';
-	}
-
-	function hideContent(startIndex) {
-		for (var hideIndex = 0; hideIndex < tabsCon.length; hideIndex++) {
-			tabsCon[hideIndex].style.display = 'none';
-
-			if (startIndex === 0) {
-				tabsCon[startIndex].style.display = 'block';
+		for(var index = 0; index < tabs.length; index++) {
+			(function(i) {
+				if (document.addEventListener) {
+					tabs[i].addEventListener('click', function() {
+						toggleTab(i);
+					});
+				} else {
+					tabs[i].attachEvent('onclick', function() {
+						toggleTab(i);
+					});
+				}
+			})(index) // To keep the context and index number
+		}
+		
+		function toggleTab(i) {
+			hideContent();
+			tabsCon[i].style.display = 'block';
+		}
+	
+		function hideContent(startIndex) {
+			for (var hideIndex = 0; hideIndex < tabsCon.length; hideIndex++) {
+				tabsCon[hideIndex].style.display = 'none';
+	
+				if (startIndex === 0) {
+					tabsCon[startIndex].style.display = 'block';
+				}
 			}
 		}
+	
+		hideContent(0); // Show only the first item
 	}
-
-	hideContent(0); // Show only the first item
 </script>
 
 </html>

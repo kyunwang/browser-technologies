@@ -75,63 +75,67 @@
 		a:focus {
 			color: red;
 		}
-		
+
+		.hide {
+			display: none;
+		}
+
 	</style>
 </head>
 
 <body>
 	<h1>The kudo list</h1>
-	<nav>
+	<nav class="hide">
 		<ul>
 			<li>
-				<a href="#" class="tab-select">Sam</a>
+				<a href="#tab-content1" class="tab-select">Sam</a>
 			</li>
 			<li>
-				<a href="#" class="tab-select">Max</a>
+				<a href="#tab-content2" class="tab-select">Max</a>
 			</li>
 			<li>
-				<a href="#" class="tab-select">Chana</a>
+				<a href="#tab-content3" class="tab-select">Chana</a>
 			</li>
 			<li>
-				<a href="#" class="tab-select">Leonie</a>
+				<a href="#tab-content4" class="tab-select">Leonie</a>
 			</li>
 			<li>
-				<a href="#" class="tab-select">Fenna</a>
+				<a href="#tab-content5" class="tab-select">Fenna</a>
 			</li>
 		</ul>
 	</nav>
 
 	<main>
 		<ul>
-			<li class="tab-con">
+			<li id="tab-content1" class="tab-con">
 				<img src="./person-placeholder.png" alt="">
 				<section>
 					<h3>Sam</h3>
 					<p>A student at HvA. You know it.</p>
 				</section>
 			</li>
-			<li class="tab-con">
+			<li id="tab-content2" class="tab-con">
 				<img src="./person-placeholder.png" alt="">
 				<section>
 					<h3>Max</h3>
 					<p>A student at HvA. You know it.</p>
 				</section>
 			</li>
-			<li class="tab-con">
+			<li id="tab-content3" class="tab-con">
 				<img src="./person-placeholder.png" alt="">
 				<section>
 					<h3>Chana</h3>
 					<p>A student at HvA. You know it.</p>
 				</section>
 			</li>
-			<li class="tab-con">
+			<li id="tab-content4" class="tab-con">
 				<img src="./person-placeholder.png" alt="">
 				<section>
 					<h3>Leonie</h3>
 					<p>A student at HvA. You know it.</p>
 				</section>
 			</li>
-			<li class="tab-con">
+			<li id="tab-content5" class="tab-con">
 				<img src="./person-placeholder.png" alt="">
 				<section>
 					<h3>Fenna</h3>
@@ -143,41 +147,98 @@
 </body>
 
 <script>
-	if (document.getElementsByClassName) {
-		var tabs = document.getElementsByClassName('tab-select');
-		var tabsCon = document.getElementsByClassName('tab-con');
+	// Below is the new script
+
+	// if (document.getElementsByClassName) {
+	// 	var tabs = document.getElementsByClassName('tab-select');
+	// 	var tabCon = document.getElementsByClassName('tab-con');
 	
-		for(var index = 0; index < tabs.length; index++) {
-			(function(i) {
-				if (document.addEventListener) {
-					tabs[i].addEventListener('click', function() {
-						toggleTab(i);
-					});
-				} else {
-					tabs[i].attachEvent('onclick', function() {
-						toggleTab(i);
-					});
-				}
-			})(index) // To keep the context and index number
-		}
+	// 	for(var index = 0; index < tabs.length; index++) {
+	// 		(function(i) {
+	// 			if (document.addEventListener) {
+	// 				tabs[i].addEventListener('click', function() {
+	// 					toggleTab(i);
+	// 				});
+	// 			} else {
+	// 				tabs[i].attachEvent('onclick', function() {
+	// 					toggleTab(i);
+	// 				});
+	// 			}
+	// 		})(index) // To keep the context and index number
+	// 	}
 		
-		function toggleTab(i) {
-			hideContent();
-			tabsCon[i].style.display = 'block';
+	// 	function toggleTab(i) {
+	// 		hideContent();
+	// 		tabCon[i].style.display = 'block';
+	// 	}
+	
+	// 	function hideContent(startIndex) {
+	// 		for (var hideIndex = 0; hideIndex < tabCon.length; hideIndex++) {
+	// 			tabCon[hideIndex].style.display = 'none';
+	
+	// 			if (startIndex === 0) {
+	// 				tabCon[startIndex].style.display = 'block';
+	// 			}
+	// 		}
+	// 	}
+	
+	// 	hideContent(0); // Show only the first item
+	// }
+</script>
+
+<script>
+	function addClickEvent(el, callback) {
+		if (document.addEventListener) {
+			el.addEventListener('click', callback);
+		} else {
+			el.attachEvent('onclick', callback);
 		}
-	
-		function hideContent(startIndex) {
-			for (var hideIndex = 0; hideIndex < tabsCon.length; hideIndex++) {
-				tabsCon[hideIndex].style.display = 'none';
-	
-				if (startIndex === 0) {
-					tabsCon[startIndex].style.display = 'block';
+	}
+
+	// Just took translate for this case
+	if ((typeof(document.createElement('nav').translate) != 'undefined')) {
+		var nav = document.getElementsByTagName('nav')[0];
+	} else {
+		var nav = document.getElementsByTagName('ul')[0];
+	}
+
+
+	// If javascript is turned on
+	// 1. Hide all items except the first one
+	// 2. Add a click event to hide all except the selected one
+	if (document.getElementsByClassName) {
+		// className: (since IE6+, Firefox 2+, Chrome 1+ etc)
+		nav.className = '';
+
+		var tabItems = document.getElementsByTagName('a');
+		var tabCon = document.getElementsByClassName('tab-con');
+
+		for (var index = 0; index < tabItems.length; index++) {
+			addClickEvent(tabItems[index], function(e) {
+				var href = e.target.getAttribute("href").replace('#', '');
+				toggleTab(href);
+				e.preventDefault();
+			});
+		}
+
+		// Switching on / off the tabs
+		function toggleTab(tab) {
+			for (var indexT = 0; indexT < tabCon.length; indexT++) {
+				if (tab === tabCon[indexT].id) {
+					tabCon[indexT].style.display = 'block';
+				} else {
+					tabCon[indexT].style.display = 'none';
 				}
 			}
 		}
-	
-		hideContent(0); // Show only the first item
+
+		toggleTab('tab-content1');
+	} else {
+		// Remove the nav if JS is not enabled
+		// Support (since IE6+, Firefox 2+, Chrome 1+ etc)
+		nav.parentNode.removeChild(nav);
 	}
+
 </script>
 
 </html>

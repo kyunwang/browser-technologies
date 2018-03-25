@@ -1,9 +1,30 @@
 # Browser Technologies
 // Robuuste, toegankelijke websites leren bouwen …
 
+Feedback:
+## Tabs
+1. Instead of using `#` on `<a>` tags, link them to sections
+2. The tabs are unneeded if javascript is does not work.
+
+**Fix**
+1. Applied `id`'s to the sections and linked to them explicitly in the tab instead of using `#`
+2. If `getElementByClassName` is not supported the tabs will be removed
+
+- The nav is by default hidden now and will be shown if JS is enabled and `getElementByClassName` is supported.
+
+Also created a function to check on eventlisteners support.
+
+## Image Picker 2
+1. The `<img>` placeholder is clutter if `FileReader` is not supported 
+
+**Fix**
+1. Load in the `<img>` placeholder if the `FileReader` is supported 
+
+
+
 **[Tabs](https://kyunwang.github.io/browser-technologies/opdracht2/tabs/)**
 
-**[Image picker](https://kyunwang.github.io/browser-technologies/opdracht2/image-picker/)**
+**[Image picker] - does not use `<input>`(https://kyunwang.github.io/browser-technologies/opdracht2/image-picker/)**
 
 **[Image picker 2](https://kyunwang.github.io/browser-technologies/opdracht2/image-picker/image-picker2)**
 # Opdracht 2 - 1, 2, 3 Feature Detectie

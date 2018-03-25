@@ -38,7 +38,6 @@
 		<fieldset>
 			<label for="file-input"></label>
 			<input id="file-input" type="file" accept="image/*" name="image-file">
-			<img src="#" alt="">
 		</fieldset>
 		<input type="submit" value="Use as profile picture" name="submit-button">
 	</form>
@@ -46,16 +45,21 @@
 
 <script>
 	var imageSelect = {
-		imageInput: document.getElementsByName('image-file'),
+		imageInput: document.getElementsByName('image-file')[0],
 		submitImage: document.getElementsByName('submit-button'),
-		filePreview: document.getElementsByTagName('img'),
+		filePreview: null,
 		gotFileReader: 'FileReader' in window,
-		init() {
+		init: function () {
 			if (this.gotFileReader) {
+				var imageHolder = document.createElement('img');
+				this.imageInput.insertAdjacentElement('afterend', imageHolder);
+
+				this.filePreview = document.getElementsByTagName('img');
+
 				var self = this;
 				this.submitImage[0].disabled = true;
 
-				this.imageInput[0].onchange = function () {
+				this.imageInput.onchange = function () {
 					var reader = new FileReader(); // Asynchronously read the contents of files
 			
 					if (this.files && this.files[0]) {
